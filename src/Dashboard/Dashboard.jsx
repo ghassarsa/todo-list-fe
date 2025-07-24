@@ -305,7 +305,7 @@ function Dashboard() {
                   </div>
                   </div>
                   <Link to={`/todo-list-detail/${task.id}`} className="bg-[#F1F1F1] p-3 flex-1 overflow-auto hide-scrollbar">
-                    <p className="text-gray-200 text-sm mb-2 line-clamp-2">
+                    <p className="">
                       {task.description}
                     </p>
                 {task.video && extractYouTubeId(task.video) ? (
