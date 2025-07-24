@@ -1,6 +1,7 @@
+// AppRoute.jsx
 import { Route, Routes } from "react-router-dom";
 
-import Home from '../App';
+import Home from "../App";
 import About from "../About";
 import Service from "../Service";
 import Dashboard from "../Dashboard/Dashboard";
@@ -8,20 +9,25 @@ import Register from "../auth/register";
 import ProtectedRoute from "./ProtectedRoute";
 
 function AppRoute() {
-    return (
-        <Routes>
-            {/* Landing Page */}
-            <Route path="/" element={<Home></Home>}/>
-            <Route path="/About" element={<About></About>}/>
-            <Route path="/Service" element={<Service></Service>}/>
+  return (
+    <Routes>
+      {/* Public Routes */}
+      <Route path="/" element={<Home />} />
+      <Route path="/About" element={<About />} />
+      <Route path="/Service" element={<Service />} />
+      <Route path="/register" element={<Register />} />
 
-            <Route path="/register" element={<Register></Register>}/>
-            <Route element={<ProtectedRoute>
-                <Route path="/dashboard" element={<Dashboard />} />
-                </ProtectedRoute>}>
-            </Route>
-        </Routes>
-    )
+      {/* Protected Route */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
+  );
 }
 
 export default AppRoute;
