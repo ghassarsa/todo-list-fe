@@ -1,11 +1,36 @@
 import './NavbarDB.css';
+import AuthController from '../controllers/AuthController';
 import { useState } from "react";
+import Swal from 'sweetalert2';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function ResponsiveNavbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const logout = AuthController((state) => state.logout);
+    const navigate = useNavigate();
+    const user = AuthController((state) => state.user);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    const handleLogout = async () => {
+        try {
+          await logout();
+          Swal.fire({
+            icon: "success",
+            title: "Berhasil Logout",
+            text: "Anda berhasil logout",
+          }).then(() => {
+            navigate("/");
+          });
+        } catch {
+          Swal.fire({
+            icon: "error",
+            title: "Gagal Logout",
+            text: "Silakan coba lagi",
+          });
+        }
     };
 
     return (
@@ -27,27 +52,26 @@ export default function ResponsiveNavbar() {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex bg-[#242424] max-w-[1563px] w-[20%] h-auto justify-center">
 
-                <div className="my-15 text-white flex flex-col items-center fixed">
+                <div className="my-15 text-white flex flex-col items-center fixed w-[15%]">
                     <h1 className="text-[30px] font-semibold">Todo-List</h1>
-                    <div className="w-[60%] mt-5 relative">
-                        <img src="Screenshot_2025-07-10_104510-removebg-preview.png" alt="" className="absolute top-2 right-0 h-12 w-12 object-contain translate-x-1/4 -translate-y-1/4"/>
-                        <img src="Untitled3_20250708195734.jpg" alt="" className="rounded-full outline-4 outline-white"/>
+                    <div className="w-full mt-5 relative flex justify-center">
+                        <img src={user?.avatar ? `${import.meta.env.VITE_API_URL_IMAGE}/storage/${user.avatar}` : "/src/assets/profile-default.png"} alt="" className="w-40 h-40 rounded-full outline-4 outline-white object-cover"/>
                     </div>
                     <p className="text-[21px] mt-3 font-medium">Solo Leveling</p>
                     <div className="w-full min-h-[390px] mt-7 flex flex-col items-center text-center">
-                        <div className="bg-[#626262] text-[20px] min-h-[9%] w-[80%] rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
-                            <p>Dashboard</p>
+                        <div className="bg-[#626262] text-[20px] min-h-[5vh] w-full rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
+                            <Link to="/dashboard">Dashboard</Link>
                         </div>
-                        <div className="bg-[#626262] text-[20px] min-h-[9%] w-[80%] mt-3 rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
+                        <div className="bg-[#626262] text-[20px] min-h-[5vh] w-full mt-3 rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
                             <p>History Goals</p>
                         </div>
-                        <div className="bg-[#626262] text-[20px] min-h-[9%] w-[80%] mt-3 rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
-                            <p>Settings</p>
+                        <div className="bg-[#626262] text-[20px] min-h-[5vh] w-full mt-3 rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
+                            <Link to="/settings">Settings</Link>
                         </div>
 
                         <div className="w-full mt-auto flex flex-col items-center space-y-2 mb-10">
                             <p className="flex items-center justify-center gap-2 text-white text-[21px]">Premium User <img src="Screenshot_2025-07-10_104510-removebg-preview.png" alt="" className="w-6 h-6 object-contain flex pt-1"/></p>
-                        <div className="bg-[#626262] text-[20px] min-h-[9%] w-[80%] rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
+                        <div className="bg-[#626262] text-[20px] min-h-[5vh] w-full rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer" onClick={handleLogout}>
                                 <p>Sign Out</p>
                             </div>
                         </div>
@@ -89,20 +113,20 @@ export default function ResponsiveNavbar() {
                             
                             <div className="w-full mt-6 flex flex-col space-y-3">
                                 <div className="bg-[#626262] text-lg py-3 px-4 rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
-                                    <p>Dashboard</p>
+                                    <Link to="/dashboard">Dashboard</Link>
                                 </div>
                                 <div className="bg-[#626262] text-lg py-3 px-4 rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
                                     <p>History Goals</p>
                                 </div>
                                 <div className="bg-[#626262] text-lg py-3 px-4 rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
-                                    <p>Settings</p>
+                                    <Link to="/settings" >Settings</Link>
                                 </div>
                             </div>
 
                             <div className="w-full mt-8 flex flex-col items-center space-y-3">
                                 <p className="flex items-center justify-center gap-2 text-white text-lg">Premium User <img src="Screenshot_2025-07-10_104510-removebg-preview.png" alt="" className="w-5 h-5 object-contain"/></p>
                                 <div className="bg-[#626262] text-lg py-3 px-4 w-full rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
-                                    <p>Sign Out</p>
+                                    <button onClick={handleLogout}>Sign Out</button>
                                 </div>
                             </div>
                         </div>
