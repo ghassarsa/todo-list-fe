@@ -7,6 +7,7 @@ import './Dashboard.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function Dashboard() {
+    const [searchTerm, setSearchTerm] = useState("");
     const [modal, setModal] = useState(false);
     const [editId, setEditId] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -20,6 +21,10 @@ function Dashboard() {
 
     const { task, getTask, storeTask, clearMessage, deleteTask } =
       TaskController();
+
+    const filteredTasks = task.filter((t) =>
+      t.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const handleStoreTask = async (e) => {
       e.preventDefault();
@@ -182,7 +187,7 @@ function Dashboard() {
     return (
         <div className="flex flex-col lg:flex-row min-h-screen">
         <NavbarDB />
-            <div className="flex-1 p-15">
+            <div className="flex-1 p-15 max-sm:p-4">
                 <h1 className="text-4xl font-semibold">Your Goals</h1>
                 <div className="mt-10 flex flex-row gap-4">
                     <button onClick={() => openAddModal()} className="px-6 sm:px-10 lg:px-16 py-2 bg-[#7F7F7F] text-base sm:text-lg lg:text-xl text-white font-semibold rounded-lg">Add Todo</button>
@@ -264,7 +269,7 @@ function Dashboard() {
                     )}
 
                     <div className="relative flex-1 hidden md:block">
-                        <input type="text" placeholder="Cari todo..." className="w-full px-4 py-2 border rounded-md text-base"/>
+                        <input type="text" placeholder="Cari todo..." className="w-full px-4 py-2 border rounded-md text-base" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
                         <img src="search.png" alt="search" className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5"/>
                     </div>
 
@@ -275,6 +280,9 @@ function Dashboard() {
                         </button>
                     </div>
                 </div>
+
+                {searchTerm && (<p className="md:hidden text-center mt-3">Hasil pencarian: {searchTerm}</p>)}
+
                 
                 {/* Todo List */}
                 {loading ? (
@@ -285,8 +293,8 @@ function Dashboard() {
                   </div>
                 ) : (
                 <div className="flex flex-wrap gap-4 items-stretch">
-                    {task.map((task) => (
-                <div key={task.id} className="w-[30%] h-[35vh] max-lg:w-[45%] max-lg:h-[70vh] max-md:w-[100%] max-md:h-[100vh] max-sm:w-[100%] max-sm:h-[130vh] mt-8 flex flex-col" data-aos="fade-up">
+                    {filteredTasks.map((task) => (
+                <div key={task.id} className="w-[30%] h-[35vh] max-xl:w-[40%] max-xl:h-[50vh] max-lg:w-[45%] max-lg:h-[70vh] max-md:w-[100%] max-md:h-[100vh] max-sm:w-[100%] max-sm:h-[130vh] mt-8 flex flex-col" data-aos="fade-up">
                   <div className="bg-[#313131] py-2 px-3 flex justify-between">
                 <Link to={`/todo-list-detail/${task.id}`} className="text-xl font-semibold mb-1 text-white hover:underline w-full">  {task.title.split(" ").slice(0, 2).join(" ")} {task.title.split(" ").length > 2 ? "..." : ""}</Link>
                     <div className="flex space-x-3 mb-auto">
@@ -341,7 +349,11 @@ function Dashboard() {
             </div>
 
             {/* Memunculkan Overlay Search Mobile */}
-            <input type="text" className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[80%] h-0 sm:w-[80%] bg-white shadow-lg z-50 p-6 rounded-lg transition-opacity duration-300 ease-in-out outline-1 outline-[#242424] ${showSearchDrawer ? "opacity-100 visible" : "opacity-0 invisible"}`}/>
+            <input type="text" className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[80%] h-0 sm:w-[80%] bg-white shadow-lg z-50 p-6 rounded-lg transition-opacity duration-300 ease-in-out outline-1 outline-[#242424] ${showSearchDrawer ? "opacity-100 visible" : "opacity-0 invisible"}`} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") {
+              setShowSearchDrawer(false);
+              }
+            }}/>
 
             {/* BACKGROUND OPACITY HITAM */}
             {showSearchDrawer && (
