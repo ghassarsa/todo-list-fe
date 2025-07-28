@@ -8,6 +8,7 @@ import Register from "../auth/register";
 import ProtectedRoute from "./ProtectedRoute";
 import Settings from "../Dashboard/Settings";
 import TodoListDetail from "../Dashboard/TodoListDetail";
+import Plans from "../Dashboard/Plan";
 
 function AppRoute() {
   return (
@@ -18,6 +19,7 @@ function AppRoute() {
       <Route path="/service" element={<Service />} />
       <Route path="/register" element={<Register />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/plans" element={<Plans />} />
 
       {/* Protected Dashboard */}
       <Route element={<ProtectedRoute />}>

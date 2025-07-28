@@ -4,6 +4,7 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import SubtaskController from "../controllers/SubtaskController";
+import TaskController from "../controllers/TaskController";
 
 function TodoListDetail() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -15,6 +16,20 @@ function TodoListDetail() {
         deleteSubtask,
         changeStatus,
     } = SubtaskController();
+
+    const [description, setDescription] = useState("");
+    const getTaskById = TaskController((state) => state.getTaskById);
+
+    useEffect(() => {
+      const fetchTaskDetail = async () => {
+        const taskDetail = await getTaskById(taskId);
+        if (taskDetail) {
+          setDescription(taskDetail.description);
+        }
+      };
+      fetchTaskDetail();
+    }, [taskId]);
+
 
     const formatStatus = (status) => {
         if (status === "in_progress") return "In Progress";
@@ -265,13 +280,13 @@ function TodoListDetail() {
 
                     <div className='w-1/2 flex flex-row'>
                         <hr className='mt-2 w-px bg-black h-full outline-2'/>
-                        <div className='w-full flex flex-wrap'>
+                        <div className='w-full flex flex-wrap mb-auto'>
                             <div className='w-full h-13 ml-3 mr-0.5 flex flex-row gap-3'>
                                 <h1 className='text-[30px] font-semibold'>Note</h1>
                                 <hr className='w-full outline-2 my-auto' />
                             </div>
                             <div className='w-full h-auto ml-3 bg-[#efefef] break-all'>
-                                <p className='text-[20px] font-semibold mx-3'>udisfh dsfiuhbdsafiusadbf sdfkbsdf sdfkubdsf dsfkisdbfsd fsdfijujbsdf sdfsadkjfbadsf asfisbdfhj fjadhsf yhb ndftyg bnfkrtuvy67 bt6 gbfruvy6 bnitu7 ,hnvmit78 hyner67 gtbcn c7 v46 466mtcgbn76 tgbcn 5ctgtbcn5 ecdtygmhbn36 5cydrtghxbfv 356edfrstxybghv35 cey cbfghvx5 cydtghbn4678 uvychb 6bcgn6thgb v6htgfnbv 6tghbcv 45 tbfghvc 7hubmnhyb hbnv gtbv n6 yhgn bvt6ghbfcv u6yhgnbv 67 htygnbf6ughrtyfnbvc 6u5rtyhfgncvb56thfbgnvc 56tghnyfb v6urhtfgnv 45yhtrbdfgv 345rtfgv09 ibjkhm76 cgcbn6 cetcnb cgbn6 bn67 cgbnr6 b 6gb 6fryfh v</p>
+                                <p className='text-[20px] font-semibold mx-3'>{description || "Tidak ada catatan"}</p>
                             </div>
                         </div>
                     </div>
