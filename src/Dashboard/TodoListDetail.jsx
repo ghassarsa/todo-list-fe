@@ -208,12 +208,12 @@ function TodoListDetail() {
         <>
         <div className="flex flex-col lg:flex-row min-h-screen">
         <NavbarDB />
-            <div className="flex-1 p-15">
+            <div className="flex-1 p-15 max-md:p-1">
                 <div className='w-full min-h-[10vh] h-auto bg-[#313131]'>
                     <h1 className='px-5 py-1 text-white text-[23px]'>Apa yang akan terjadi bila bahwasannya kita sering kali berharap terhadap hal yang kita takutkan oleh orang orang yang akan melakukannya. hal mendasar apa bila akan menjadi puncak efisiensi kronoligi efektif manufaktur</h1>
                 </div>
-                <div className='flex'>
-                    <div className='w-1/2 flex-wrap'>
+                <div className='flex max-md:flex-col'>
+                    <div className='w-1/2 max-md:w-full flex-wrap'>
                         <h1 className='w-[97.5%] text-[18px] mt-1 font-semibold'>Goals: find the trails and will be able to find the track. defends the tree brotherhood and destroy spanish</h1>
                         <div className='w-[97.5%] gap-2 flex flex-row'>
                             <div className="relative w-[97.5%]">
@@ -278,8 +278,8 @@ function TodoListDetail() {
 
 
 
-                    <div className='w-1/2 flex flex-row'>
-                        <hr className='mt-2 w-px bg-black h-full outline-2'/>
+                    <div className='w-1/2 max-md:w-full flex flex-row'>
+                        <hr className='mt-2 w-px max-md:hidden bg-black h-full outline-2'/>
                         <div className='w-full flex flex-wrap mb-auto'>
                             <div className='w-full h-13 ml-3 mr-0.5 flex flex-row gap-3'>
                                 <h1 className='text-[30px] font-semibold'>Note</h1>

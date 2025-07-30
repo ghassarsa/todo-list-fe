@@ -37,6 +37,8 @@ export default function Login({ isOpen, onClose }) {
       }
     };
 
+    if (!isOpen) return null;
+    
     return (
     <>
       {/* Backdrop */}

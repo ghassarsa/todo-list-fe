@@ -104,10 +104,10 @@ function Dashboard() {
 
     const openAddModal = () => {
       const isPremium = localStorage.getItem("user_status") === "premium";
-      if (!isPremium && task.length >= 2) {
+      if (!isPremium && task.length >= 1) {
         Swal.fire({
           title: "Upgrade ke Premium",
-          text: "Akun gratis hanya bisa menambahkan 2 todo. Upgrade ke premium sekarang?",
+          text: "Akun gratis hanya bisa menambahkan 1 todo. Upgrade ke premium sekarang?",
           icon: "info",
           showCancelButton: true,
           confirmButtonText: "Lihat Plan",

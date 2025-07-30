@@ -42,6 +42,8 @@ export default function Register({ isOpen, onClose }) {
     }
   };
 
+  if (!isOpen) return null;
+
   return (
     <>
       {/* Backdrop */}

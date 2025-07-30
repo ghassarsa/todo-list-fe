@@ -57,7 +57,7 @@ export default function ResponsiveNavbar() {
                     <div className="w-full mt-5 relative flex justify-center">
                         <img src={user?.avatar ? `${import.meta.env.VITE_API_URL_IMAGE}/storage/${user.avatar}` : "/src/assets/profile-default.png"} alt="" className="w-40 h-40 rounded-full outline-4 outline-white object-cover"/>
                     </div>
-                    <p className="text-[21px] mt-3 font-medium">{user.name}</p>
+                    <p className="text-[21px] mt-3 font-medium">Greetings, {user.name}!</p>
                     <div className="w-full min-h-[390px] mt-7 flex flex-col items-center text-center">
                         <div className="bg-[#626262] text-[20px] min-h-[5vh] w-full rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
                             <Link to="/dashboard">Dashboard</Link>
