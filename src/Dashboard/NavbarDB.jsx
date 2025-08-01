@@ -57,7 +57,7 @@ export default function ResponsiveNavbar() {
                     <div className="w-full mt-5 relative flex justify-center">
                         <img src={user?.avatar ? `${import.meta.env.VITE_API_URL_IMAGE}/storage/${user.avatar}` : "/src/assets/profile-default.png"} alt="" className="w-40 h-40 rounded-full outline-4 outline-white object-cover"/>
                     </div>
-                    <p className="text-[21px] mt-3 font-medium">Greetings, {user.name}!</p>
+                    <p className="text-[21px] mt-3 font-medium text-center">Greetings, {user.name}!</p>
                     <div className="w-full min-h-[390px] mt-7 flex flex-col items-center text-center">
                         <div className="bg-[#626262] text-[20px] min-h-[5vh] w-full rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
                             <Link to="/dashboard">Dashboard</Link>
@@ -70,7 +70,9 @@ export default function ResponsiveNavbar() {
                         </div>
 
                         <div className="w-full mt-auto flex flex-col items-center space-y-2 mb-10">
+                            {user?.status === "premium" && (
                             <p className="flex items-center justify-center gap-2 text-white text-[21px]">Premium User <img src="/assets/Screenshot_2025-07-10_104510-removebg-preview.png" alt="" className="w-6 h-6 object-contain flex pt-1"/></p>
+                            )}
                         <div className="bg-[#626262] text-[20px] min-h-[5vh] w-full rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer" onClick={handleLogout}>
                                 <p>Sign Out</p>
                             </div>
@@ -106,10 +108,9 @@ export default function ResponsiveNavbar() {
                         {/* Mobile Menu Content */}
                         <div className="p-4 text-white flex flex-col items-center">
                             <div className="w-24 h-24 mt-4 relative">
-                                <img src="Screenshot_2025-07-10_104510-removebg-preview.png" alt="" className="absolute top-0 right-0 h-8 w-8 object-contain translate-x-1/4 -translate-y-1/4"/>
-                                <img src="Untitled3_20250708195734.jpg" alt="" className="w-full h-full rounded-full outline-2 outline-white object-cover"/>
+                                <img src={user?.avatar ? `${import.meta.env.VITE_API_URL_IMAGE}/storage/${user.avatar}` : "/src/assets/profile-default.png"} alt="" className="w-full h-full rounded-full outline-2 outline-white object-cover"/>
                             </div>
-                            <p className="text-lg mt-3 font-medium">Solo Leveling</p>
+                            <p className="text-lg mt-3 font-medium">Greetings, {user.name}!</p>
                             
                             <div className="w-full mt-6 flex flex-col space-y-3">
                                 <div className="bg-[#626262] text-lg py-3 px-4 rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
@@ -124,7 +125,9 @@ export default function ResponsiveNavbar() {
                             </div>
 
                             <div className="w-full mt-8 flex flex-col items-center space-y-3">
+                                {user?.status === "premium" && (
                                 <p className="flex items-center justify-center gap-2 text-white text-lg">Premium User <img src="Screenshot_2025-07-10_104510-removebg-preview.png" alt="" className="w-5 h-5 object-contain"/></p>
+                                )}
                                 <div className="bg-[#626262] text-lg py-3 px-4 w-full rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
                                     <button onClick={handleLogout}>Sign Out</button>
                                 </div>

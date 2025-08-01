@@ -18,6 +18,7 @@ function TodoListDetail() {
     } = SubtaskController();
 
     const [description, setDescription] = useState("");
+    const [title, setTitle] = useState("");
     const getTaskById = TaskController((state) => state.getTaskById);
 
     useEffect(() => {
@@ -25,6 +26,7 @@ function TodoListDetail() {
         const taskDetail = await getTaskById(taskId);
         if (taskDetail) {
           setDescription(taskDetail.description);
+          setTitle(taskDetail.title);
         }
       };
       fetchTaskDetail();
@@ -209,7 +211,7 @@ function TodoListDetail() {
         <NavbarDB />
             <div className="flex-1 p-15 max-md:p-1">
                 <div className='w-full min-h-[10vh] h-auto bg-[#313131]'>
-                    <h1 className='px-5 py-1 text-white text-[23px]'>Apa yang akan terjadi bila bahwasannya kita sering kali berharap terhadap hal yang kita takutkan oleh orang orang yang akan melakukannya. hal mendasar apa bila akan menjadi puncak efisiensi kronoligi efektif manufaktur</h1>
+                    <h1 className='px-5 py-1 text-white text-[23px]'>{title || "Tidak ada judul"}</h1>
                 </div>
                 <div className='flex max-md:flex-col'>
                     <div className='w-1/2 max-md:w-full flex-wrap'>

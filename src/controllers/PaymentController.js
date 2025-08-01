@@ -71,7 +71,7 @@ const PaymentController = () => {
 
               const { logout } = AuthController.getState();
               logout();
-              window.location.href = "/login";
+              window.location.href = "/";
             });
           },
           onPending: (result) => {
