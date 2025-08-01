@@ -63,7 +63,7 @@ export default function ResponsiveNavbar() {
                             <Link to="/dashboard">Dashboard</Link>
                         </div>
                         <div className="bg-[#626262] text-[20px] min-h-[5vh] w-full mt-3 rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
-                            <p>History Goals</p>
+                            <Link to="/history">History Goals</Link>
                         </div>
                         <div className="bg-[#626262] text-[20px] min-h-[5vh] w-full mt-3 rounded-lg font-medium hover:bg-[#505050] flex items-center justify-center cursor-pointer">
                             <Link to="/settings">Settings</Link>

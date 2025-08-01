@@ -10,8 +10,22 @@ function Home() {
     return (
         <>
         <Navbar onOpenRegister={() => {setIsLoginOpen(false); setIsRegisterOpen(true)}}  onOpenLogin={() => {setIsRegisterOpen(false); setIsLoginOpen(true)}}/>
-            <Register isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
-            <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+            <Register
+                  isOpen={isRegisterOpen}
+                  onClose={() => setIsRegisterOpen(false)}
+                  onOpenLogin={() => {
+                    setIsRegisterOpen(false);
+                    setIsLoginOpen(true);
+                  }}
+                />
+            <Login
+                  isOpen={isLoginOpen}
+                  onClose={() => setIsLoginOpen(false)}
+                  onOpenRegister={() => {
+                    setIsLoginOpen(false);
+                    setIsRegisterOpen(true);
+                  }}
+                />
         <div id="home" className="min-h-[693px] w-[100%] max-w-[1563px] bg-[url('background-4876988_1920.jpg')] bg-center bg-cover flex justify-center items-center mx-auto scroll-mt-20.5">
             <div className="w-full max-w-7xl flex flex-col-reverse lg:flex-row items-center">
                 <div className="w-full lg:w-1/2">

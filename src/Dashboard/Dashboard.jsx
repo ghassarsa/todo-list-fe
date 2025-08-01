@@ -19,10 +19,11 @@ function Dashboard() {
       image: null,
     });
 
-    const { task, getTask, storeTask, clearMessage, deleteTask } =
-      TaskController();
+    const { task, getTask, storeTask, clearMessage, deleteTask, validateTask } = TaskController();
+
 
     const filteredTasks = task.filter((t) =>
+      t.completed === "no" &&
       t.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
@@ -309,6 +310,12 @@ function Dashboard() {
                       onClick={() => handleDelete(task.id)}
                     >
                       <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                    <button
+                      className="text-lg font-medium text-yellow-200 hover:underline hover:cursor-pointer"
+                      onClick={() => validateTask(task.id)}
+                    >
+                    <i class="fa-solid fa-circle-check"></i>
                     </button>
                   </div>
                   </div>

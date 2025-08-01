@@ -58,13 +58,12 @@ const AuthController = create((set) => ({
     localStorage.removeItem("token");
   },
 
-  register: async (data, navigate) => {
+  register: async (data) => {
     try {
       const res = await axios.post(`${baseUrl}/auth/register`, data);
 
-      const user = res.data.user;
-      set({ user, error: null });
-      navigate("/login");
+      set({ error: null });
+      return res.data;
     } catch (err) {
       const errorMsg =
         err.response?.data?.errors?.email?.[0] ||
@@ -73,6 +72,7 @@ const AuthController = create((set) => ({
         "Terjadi kesalahan saat register";
 
       set({ error: errorMsg });
+      throw err;
     }
   },
 }));

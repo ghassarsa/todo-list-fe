@@ -30,7 +30,6 @@ function TodoListDetail() {
       fetchTaskDetail();
     }, [taskId]);
 
-
     const formatStatus = (status) => {
         if (status === "in_progress") return "In Progress";
         if (status === "pending") return "Pending";
